@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "SelfCare";
+}
+
+<h2>SelfCare</h2>
+
+<script>notsignedin();</script>
+@{
+
+    if (Session["signin"] == "1")
+    {
+        <script>signedin();</script>
+    }
+}
+
+<div class="row">
+    @{
+        foreach (var d in ViewBag.carelist)
+        {
+            <div style="align-content:center;margin-top:50px;padding:30px;">
+                <div style="background-color:red;width:100px;height:100px;float:left;"><img style="height:99px;width:99px;" src="~/image.jpg" /></div>
+                <div>
+                    <div style="width:80%">
+                        <h3 style="float:left;margin-left:30px;">@d.Name</h3>
+                    </div>
+
+                    <div style="float:right; width:20%;">
+                        <h4>Price: @d.Price TL</h4>
+                    </div>
+                    <br />
+                    <br />
+                    <h5 style="float:right">Seller: @d.Customer_ID</h5>
+
+                    <div id="buy" style="float:right;margin-right:50px">
+                        @Html.ActionLink("Details", "Details", "Home", new { id = d.ID }, null)
+                        @Html.ActionLink("Buy", "Buy", "Home", new { id = @d.ID }, null)
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>
+
+@section scripts
+    {
+    <script type="text/javascript">
+
+        function signedin() {
+            document.getElementById('signin').style.visibility = 'hidden';
+            document.getElementById('signout').style.visibility = 'visible';
+            document.getElementById('cart').style.visibility = 'visible';
+        }
+
+        function notsignedin() {
+            document.getElementById('signin').style.visibility = 'visible';
+            document.getElementById('signout').style.visibility = 'hidden';
+        }
+        function BuyButton()
+        {
+
+        }
+    </script>}
